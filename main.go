@@ -13,7 +13,7 @@ type MyCheckoutCmd struct {
 
 var args struct {
 	Checkout *MyCheckoutCmd `arg:"subcommand:checkout"`
-	Quiet    bool         `arg:"-q"` // this flag is global to all subcommands
+	Quiet    bool           `arg:"-q"` // this flag is global to all subcommands
 }
 
 func main() {
