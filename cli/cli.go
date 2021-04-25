@@ -1,8 +1,6 @@
-package goapp
+package cli
 
-import (
-	"github.com/alexflint/go-arg"
-)
+import "github.com/alexflint/go-arg"
 
 type GoApp struct {
 	Name    string

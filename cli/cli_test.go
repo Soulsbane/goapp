@@ -1,7 +1,8 @@
-package main
+package cli_test
 
 import (
 	"fmt"
+	"testing"
 
 	"github.com/Soulsbane/goapp/cli"
 )
@@ -16,7 +17,7 @@ var args struct {
 	Quiet    bool           `arg:"-q"` // this flag is global to all subcommands
 }
 
-func main() {
+func TestCli(m *testing.T) {
 	app := cli.NewCmdLineApp("Test App", "1.0", &args)
 	fmt.Println(app.Name)
 	fmt.Println(args.Checkout.Track)
