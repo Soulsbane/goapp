@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/Soulsbane/goapp/cli"
+	"github.com/Soulsbane/goapp/pkg/cli"
 )
 
 type MyCheckoutCmd struct {
