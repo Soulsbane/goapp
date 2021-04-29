@@ -20,4 +20,5 @@ func main() {
 	fmt.Println(app.Name)
 	fmt.Println(args.NewApp.AppName)
 	fmt.Println(args.Quiet)
+	app.PrintError("This is an warning")
 }
