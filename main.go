@@ -1,5 +1,6 @@
 package main
 
+// INFO Use go get github.com/Soulsbane/goapp@develop to get latest changes.
 import (
 	"fmt"
 
