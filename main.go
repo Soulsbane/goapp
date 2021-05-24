@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/Soulsbane/goapp/pkg/cli"
+	"github.com/Soulsbane/goapp/pkg/config"
 )
 
 type NewAppCommand struct {
@@ -20,5 +21,6 @@ func main() {
 	fmt.Println(app.Name)
 	fmt.Println(args.NewApp.AppName)
 	fmt.Println(args.Quiet)
-	app.PrintError("This is an warning")
+	app.PrintError("This is an error")
+	config.ConfigHello()
 }

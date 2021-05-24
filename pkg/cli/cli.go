@@ -8,6 +8,7 @@ import (
 type GoApp struct {
 	Name    string
 	Version string
+	Debug   bool
 }
 
 // NewCmdLineApp returns a new CLI instance with sensible defaults
@@ -23,10 +24,10 @@ func NewCmdLineApp(name string, version string, args interface{}) *GoApp {
 
 // PrintError print a message in red
 func (app GoApp) PrintError(msg string) {
-	pterm.FgRed.Println(msg)
+	pterm.Error.Println(msg)
 }
 
 // PrintWarning print a message in yellow
 func (app GoApp) PrintWarning(msg string) {
-	pterm.FgYellow.Println(msg)
+	pterm.Warning.Println(msg)
 }
