@@ -24,4 +24,5 @@ func main() {
 	fmt.Println(args.Quiet)
 	app.PrintError("This is an error")
 	config.ConfigHello()
+	fmt.Println(app.GetUserConfigDir())
 }

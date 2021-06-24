@@ -1,12 +1,16 @@
 package cli
 
 import (
+	"os"
+	"path/filepath"
+
 	"github.com/alexflint/go-arg"
 	"github.com/pterm/pterm"
 )
 
 type GoApp struct {
 	Name    string
+	Vendor  string
 	Version string
 	Debug   bool
 }
@@ -16,6 +20,7 @@ type GoApp struct {
 func NewCmdLineApp(name string, version string, args interface{}) *GoApp {
 	var app GoApp
 	app.Name = name
+	app.Vendor = "" // FIXME: Empty string for now. Will be adding better optional parameters support.
 	app.Version = version
 
 	arg.MustParse(args)
@@ -45,4 +50,10 @@ func (app GoApp) PrintDebug(msg string) {
 // PrintInfo print a message in cyan
 func (app GoApp) PrintInfo(msg string) {
 	pterm.Info.Println(msg)
+}
+
+// GetUserConfigDir Get the path to user's config dir with application and optionally vendor appened
+func (app GoApp) GetUserConfigDir() string {
+	dir, _ := os.UserConfigDir()
+	return filepath.Join(dir, app.Vendor, app.Name)
 }
