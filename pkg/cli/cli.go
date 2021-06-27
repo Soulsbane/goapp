@@ -15,9 +15,9 @@ type GoApp struct {
 	Debug   bool
 }
 
-// NewCmdLineApp returns a new CLI instance with sensible defaults
-//func NewCmdLineApp(name string, version string, args interface{}) *GoApp {
-func NewCmdLineApp(name string, version string, args interface{}) *GoApp {
+// NewGoApp returns a new GoApp instance with sensible defaults
+//func NewGoApp(name string, version string, args interface{}) *GoApp {
+func NewGoApp(name string, version string, args interface{}) *GoApp {
 	var app GoApp
 	app.Name = name
 	app.Vendor = "" // FIXME: Empty string for now. Will be adding better optional parameters support.

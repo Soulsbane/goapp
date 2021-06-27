@@ -18,7 +18,7 @@ var args struct {
 }
 
 func main() {
-	app := cli.NewCmdLineApp("Test App", "1.0", &args)
+	app := cli.NewGoApp("Test App", "1.0", &args)
 	fmt.Println(app.Name)
 	fmt.Println(args.NewApp.AppName)
 	fmt.Println(args.Quiet)
