@@ -7,18 +7,16 @@ import (
 	"github.com/Soulsbane/goapp/pkg/cli"
 )
 
-type MyCheckoutCmd struct {
-	Branch string `arg:"positional"`
-	Track  bool   `arg:"-t"`
+type NewAppCommand struct {
+	AppName string `arg:"positional"`
 }
 
 var args struct {
-	Checkout *MyCheckoutCmd `arg:"subcommand:checkout"`
-	Quiet    bool           `arg:"-q"` // this flag is global to all subcommands
+	NewApp *NewAppCommand `arg:"subcommand:init"`
+	Quiet  bool           `arg:"-q"` // this flag is global to all subcommands
 }
 
 func TestCli(m *testing.T) {
-	app := cli.NewCmdLineApp("Test App", "1.0", &args)
+	app := cli.NewGoApp("Test App", "1.0", &args)
 	fmt.Println(app.Name)
-	fmt.Println(args.Checkout.Track)
 }
