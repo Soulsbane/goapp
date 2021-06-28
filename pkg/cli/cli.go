@@ -9,22 +9,70 @@ import (
 )
 
 type GoApp struct {
-	Name    string
-	Vendor  string
-	Version string
-	Debug   bool
+	Name        string
+	Vendor      string
+	Version     string
+	EnableDebug bool
+	Args        interface{}
 }
 
-// NewGoApp returns a new GoApp instance with sensible defaults
-//func NewGoApp(name string, version string, args interface{}) *GoApp {
-func NewGoApp(name string, version string, args interface{}) *GoApp {
-	var app GoApp
-	app.Name = name
-	app.Vendor = "" // FIXME: Empty string for now. Will be adding better optional parameters support.
-	app.Version = version
+type GoAppOption func(*GoApp)
 
-	arg.MustParse(args)
-	return &app
+var emptyArgs struct{}
+
+// NewGoApp returns a new GoApp instance with sensible defaults
+func NewGoApp(options ...GoAppOption) *GoApp {
+	const (
+		defaultName        = "New Go Application"
+		defaultVendor      = "My Vendor Name"
+		defaultVersion     = "1.0"
+		defaultEnableDebug = false
+	)
+
+	app := &GoApp{
+		Name:        defaultName,
+		Vendor:      defaultVendor,
+		Version:     defaultVersion,
+		EnableDebug: defaultEnableDebug,
+		Args:        emptyArgs,
+	}
+
+	for _, option := range options {
+		option(app)
+	}
+
+	arg.MustParse(app.Args)
+	return app
+}
+
+func WithName(name string) GoAppOption {
+	return func(app *GoApp) {
+		app.Name = name
+	}
+}
+
+func WithVendor(vendor string) GoAppOption {
+	return func(app *GoApp) {
+		app.Vendor = vendor
+	}
+}
+
+func WithVersion(version string) GoAppOption {
+	return func(app *GoApp) {
+		app.Version = version
+	}
+}
+
+func WithEnableDebug(enable bool) GoAppOption {
+	return func(app *GoApp) {
+		app.EnableDebug = enable
+	}
+}
+
+func WithArgs(args interface{}) GoAppOption {
+	return func(app *GoApp) {
+		app.Args = args
+	}
 }
 
 // PrintError print a message in red

@@ -18,7 +18,14 @@ var args struct {
 }
 
 func main() {
-	app := cli.NewGoApp("Test App", "1.0", &args)
+	app := cli.NewGoApp(
+		cli.WithName("OVER name"),
+		cli.WithVendor("OVER vend"),
+		cli.WithVersion("6.66"),
+		cli.WithEnableDebug(true),
+		cli.WithArgs(&args),
+	)
+
 	fmt.Println(app.Name)
 	fmt.Println(args.NewApp.AppName)
 	fmt.Println(args.Quiet)
