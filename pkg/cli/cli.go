@@ -34,7 +34,7 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 		Vendor:      defaultVendor,
 		Version:     defaultVersion,
 		EnableDebug: defaultEnableDebug,
-		Args:        emptyArgs,
+		Args:        &emptyArgs,
 	}
 
 	for _, option := range options {
