@@ -18,10 +18,10 @@ type GoApp struct {
 
 type GoAppOption func(*GoApp)
 
-var emptyArgs struct{}
-
 // NewGoApp returns a new GoApp instance with sensible defaults
 func NewGoApp(options ...GoAppOption) *GoApp {
+	var emptyArgs struct{}
+
 	const (
 		defaultName        = "New Go Application"
 		defaultVendor      = "My Vendor Name"
