@@ -1,7 +1,9 @@
 package cli
 
 import (
+	"log"
 	"os"
+	"path"
 	"path/filepath"
 
 	"github.com/alexflint/go-arg"
@@ -98,6 +100,19 @@ func (app GoApp) PrintDebug(msg string) {
 // PrintInfo print a message in cyan
 func (app GoApp) PrintInfo(msg string) {
 	pterm.Info.Println(msg)
+}
+
+// CreateLogger Creates a logger using the path of GetUserConfigDir for file
+func (app GoApp) CreateLogger(flag int) *log.Logger {
+	os.MkdirAll(app.GetUserConfigDir(), os.ModePerm)
+	file, err := os.OpenFile(path.Join(app.GetUserConfigDir(), "log.txt"), flag|os.O_CREATE|os.O_WRONLY, 0644)
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	logger := log.New(file, "", log.LstdFlags)
+	return logger
 }
 
 // GetUserConfigDir Get the path to user's config dir with application and optionally vendor appened

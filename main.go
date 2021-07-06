@@ -3,6 +3,7 @@ package main
 // INFO Use go get github.com/Soulsbane/goapp@develop to get latest changes.
 import (
 	"fmt"
+	"os"
 
 	"github.com/Soulsbane/goapp/pkg/cli"
 	"github.com/Soulsbane/goapp/pkg/config"
@@ -19,8 +20,8 @@ var args struct {
 
 func main() {
 	app := cli.NewGoApp(
-		cli.WithName("OVER name"),
-		cli.WithVendor("OVER vend"),
+		cli.WithName("GoApp"),
+		cli.WithVendor("Raijinsoft"),
 		cli.WithVersion("6.66"),
 		cli.WithEnableDebug(true),
 		cli.WithArgs(&args),
@@ -32,4 +33,6 @@ func main() {
 	app.PrintError("This is an error")
 	config.ConfigHello()
 	fmt.Println(app.GetUserConfigDir())
+	logger := app.CreateLogger(os.O_TRUNC)
+	logger.Println("This is a test")
 }
