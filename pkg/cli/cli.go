@@ -1,11 +1,10 @@
 package cli
 
 import (
-	"log"
 	"os"
-	"path"
 	"path/filepath"
 
+	"github.com/Soulsbane/goapp/pkg/filelogger"
 	"github.com/alexflint/go-arg"
 	"github.com/pterm/pterm"
 )
@@ -102,16 +101,8 @@ func (app GoApp) PrintInfo(msg string) {
 	pterm.Info.Println(msg)
 }
 
-// CreateLogger Creates a logger using the path of GetUserConfigDir for file
-func (app GoApp) CreateLogger(flag int) *log.Logger {
-	os.MkdirAll(app.GetUserConfigDir(), os.ModePerm)
-	file, err := os.OpenFile(path.Join(app.GetUserConfigDir(), "log.txt"), flag|os.O_CREATE|os.O_WRONLY, 0644)
-
-	if err != nil {
-		log.Println(err)
-	}
-
-	logger := log.New(file, "", log.LstdFlags)
+func (app GoApp) CreateFileLogger(fileName string, flag int) filelogger.FileLogger {
+	logger := filelogger.New(fileName, app.GetUserConfigDir(), flag)
 	return logger
 }
 

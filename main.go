@@ -33,6 +33,7 @@ func main() {
 	app.PrintError("This is an error")
 	config.ConfigHello()
 	fmt.Println(app.GetUserConfigDir())
-	logger := app.CreateLogger(os.O_TRUNC)
+	logger := app.CreateFileLogger("test.log", os.O_TRUNC)
+	// Stop logging logger.SetOutput(ioutil.Discard)
 	logger.Println("This is a test")
 }
