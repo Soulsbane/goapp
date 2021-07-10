@@ -1,6 +1,7 @@
 package filelogger
 
 import (
+	"io/ioutil"
 	"log"
 	"os"
 	"path"
@@ -30,4 +31,8 @@ func (fileLogger *FileLogger) Println(msg ...interface{}) {
 
 func (fileLogger *FileLogger) Print(msg ...interface{}) {
 	fileLogger.logger.Print(msg...)
+}
+
+func (fileLogger *FileLogger) Disable() {
+	fileLogger.logger.SetOutput(ioutil.Discard)
 }
