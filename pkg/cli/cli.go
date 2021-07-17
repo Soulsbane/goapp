@@ -11,7 +11,7 @@ import (
 
 type GoApp struct {
 	Name        string
-	Vendor      string
+	Company     string
 	Version     string
 	EnableDebug bool
 	Args        interface{}
@@ -25,14 +25,14 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 
 	const (
 		defaultName        = "New Go Application"
-		defaultVendor      = "My Vendor Name"
+		defaultCompany     = "My Company Name"
 		defaultVersion     = "1.0"
 		defaultEnableDebug = false
 	)
 
 	app := &GoApp{
 		Name:        defaultName,
-		Vendor:      defaultVendor,
+		Company:     defaultCompany,
 		Version:     defaultVersion,
 		EnableDebug: defaultEnableDebug,
 		Args:        &emptyArgs,
@@ -52,9 +52,9 @@ func WithName(name string) GoAppOption {
 	}
 }
 
-func WithVendor(vendor string) GoAppOption {
+func WithCompany(company string) GoAppOption {
 	return func(app *GoApp) {
-		app.Vendor = vendor
+		app.Company = company
 	}
 }
 
@@ -106,8 +106,8 @@ func (app GoApp) CreateFileLogger(fileName string, flag int) filelogger.FileLogg
 	return logger
 }
 
-// GetUserConfigDir Get the path to user's config dir with application and optionally vendor appened
+// GetUserConfigDir Get the path to user's config dir with application and optionally company appened
 func (app GoApp) GetUserConfigDir() string {
 	dir, _ := os.UserConfigDir()
-	return filepath.Join(dir, app.Vendor, app.Name)
+	return filepath.Join(dir, app.Company, app.Name)
 }
