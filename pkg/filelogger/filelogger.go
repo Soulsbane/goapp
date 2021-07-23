@@ -25,14 +25,14 @@ func New(fileName string, directory string, flag int) FileLogger {
 	return fileLogger
 }
 
-func (fileLogger *FileLogger) Println(msg ...interface{}) {
+func (fileLogger FileLogger) Println(msg ...interface{}) {
 	fileLogger.logger.Println(msg...)
 }
 
-func (fileLogger *FileLogger) Print(msg ...interface{}) {
+func (fileLogger FileLogger) Print(msg ...interface{}) {
 	fileLogger.logger.Print(msg...)
 }
 
-func (fileLogger *FileLogger) Disable() {
+func (fileLogger FileLogger) Disable() {
 	fileLogger.logger.SetOutput(ioutil.Discard)
 }
