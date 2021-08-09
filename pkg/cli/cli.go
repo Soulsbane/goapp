@@ -17,8 +17,6 @@ type GoApp struct {
 	Args        interface{}
 }
 
-type GoAppOption func(*GoApp)
-
 // NewGoApp returns a new GoApp instance with sensible defaults
 func NewGoApp(options ...GoAppOption) *GoApp {
 	var emptyArgs struct{}
@@ -44,36 +42,6 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 
 	arg.MustParse(app.Args)
 	return app
-}
-
-func WithName(name string) GoAppOption {
-	return func(app *GoApp) {
-		app.Name = name
-	}
-}
-
-func WithCompany(company string) GoAppOption {
-	return func(app *GoApp) {
-		app.Company = company
-	}
-}
-
-func WithVersion(version string) GoAppOption {
-	return func(app *GoApp) {
-		app.Version = version
-	}
-}
-
-func WithEnableDebug(enable bool) GoAppOption {
-	return func(app *GoApp) {
-		app.EnableDebug = enable
-	}
-}
-
-func WithArgs(args interface{}) GoAppOption {
-	return func(app *GoApp) {
-		app.Args = args
-	}
 }
 
 // PrintError print a message in red
