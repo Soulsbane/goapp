@@ -50,9 +50,11 @@ func (app GoApp) GetName() string {
 func (app GoApp) GetCompany() string {
 	return app.company
 }
+
 func (app GoApp) GetVersion() string {
 	return app.version
 }
+
 func (app GoApp) IsDebugEnabled() bool {
 	return app.debugMode
 }
