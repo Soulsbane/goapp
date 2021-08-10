@@ -1,8 +1,14 @@
 package cli
 
 import (
+	"github.com/mitchellh/colorstring"
 	"github.com/pterm/pterm"
 )
+
+// Println Print a message using mitchellh/colorstring tags
+func (app GoApp) Println(msg string) {
+	colorstring.Println(msg)
+}
 
 // PrintError print a message in red
 func (app GoApp) PrintError(msg string) {
