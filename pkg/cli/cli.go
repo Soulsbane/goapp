@@ -55,8 +55,12 @@ func (app GoApp) GetVersion() string {
 	return app.version
 }
 
-func (app GoApp) IsDebugEnabled() bool {
+func (app GoApp) IsDebugModeEnabled() bool {
 	return app.debugMode
+}
+
+func (app *GoApp) EnableDebugMode(enable bool) {
+	app.debugMode = enable
 }
 
 func (app GoApp) CreateFileLogger(fileName string, flag int) filelogger.FileLogger {
