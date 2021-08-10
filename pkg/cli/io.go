@@ -27,8 +27,10 @@ func (app GoApp) PrintWarning(msg string) {
 
 // PrintDebug print a message in gray
 func (app GoApp) PrintDebug(msg string) {
-	pterm.EnableDebugMessages()
-	pterm.Debug.Println(msg)
+	if app.IsDebugModeEnabled() {
+		pterm.EnableDebugMessages()
+		pterm.Debug.Println(msg)
+	}
 }
 
 // PrintInfo print a message in cyan
