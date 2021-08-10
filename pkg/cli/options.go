@@ -4,25 +4,25 @@ type GoAppOption func(*GoApp)
 
 func WithName(name string) GoAppOption {
 	return func(app *GoApp) {
-		app.Name = name
+		app.name = name
 	}
 }
 
-func WithCompany(company string) GoAppOption {
+func Withcompany(company string) GoAppOption {
 	return func(app *GoApp) {
-		app.Company = company
+		app.company = company
 	}
 }
 
-func WithVersion(version string) GoAppOption {
+func Withversion(version string) GoAppOption {
 	return func(app *GoApp) {
-		app.Version = version
+		app.version = version
 	}
 }
 
-func WithEnableDebug(enable bool) GoAppOption {
+func WithdebugMode(enable bool) GoAppOption {
 	return func(app *GoApp) {
-		app.EnableDebug = enable
+		app.debugMode = enable
 	}
 }
 

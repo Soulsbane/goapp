@@ -19,11 +19,11 @@ var args struct {
 func TestCli(m *testing.T) {
 	app := cli.NewGoApp(
 		cli.WithName("OVER name"),
-		cli.WithCompany("OVER vend"),
-		cli.WithVersion("6.66"),
-		cli.WithEnableDebug(true),
+		cli.Withcompany("OVER vend"),
+		cli.Withversion("6.66"),
+		cli.WithdebugMode(true),
 		cli.WithArgs(&args),
 	)
 
-	fmt.Println(app.Name)
+	fmt.Println(app.GetName())
 }

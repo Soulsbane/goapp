@@ -9,11 +9,11 @@ import (
 )
 
 type GoApp struct {
-	Name        string
-	Company     string
-	Version     string
-	EnableDebug bool
-	Args        interface{}
+	name      string
+	company   string
+	version   string
+	debugMode bool
+	Args      interface{}
 }
 
 // NewGoApp returns a new GoApp instance with sensible defaults
@@ -21,18 +21,18 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 	var emptyArgs struct{}
 
 	const (
-		defaultName        = "New Go Application"
-		defaultCompany     = "My Company Name"
-		defaultVersion     = "1.0"
-		defaultEnableDebug = false
+		defaultName      = "New Go Application"
+		defaultCompany   = "My company Name"
+		defaultVersion   = "1.0"
+		defaultDebugMode = false
 	)
 
 	app := &GoApp{
-		Name:        defaultName,
-		Company:     defaultCompany,
-		Version:     defaultVersion,
-		EnableDebug: defaultEnableDebug,
-		Args:        &emptyArgs,
+		name:      defaultName,
+		company:   defaultCompany,
+		version:   defaultVersion,
+		debugMode: defaultDebugMode,
+		Args:      &emptyArgs,
 	}
 
 	for _, option := range options {
@@ -43,6 +43,20 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 	return app
 }
 
+func (app GoApp) GetName() string {
+	return app.name
+}
+
+func (app GoApp) GetCompany() string {
+	return app.company
+}
+func (app GoApp) GetVersion() string {
+	return app.version
+}
+func (app GoApp) IsDebugEnabled() bool {
+	return app.debugMode
+}
+
 func (app GoApp) CreateFileLogger(fileName string, flag int) filelogger.FileLogger {
 	logger := filelogger.New(fileName, app.GetUserConfigDir(), flag)
 	return logger
@@ -51,5 +65,5 @@ func (app GoApp) CreateFileLogger(fileName string, flag int) filelogger.FileLogg
 // GetUserConfigDir Get the path to user's config dir with application and optionally company appened
 func (app GoApp) GetUserConfigDir() string {
 	dir, _ := os.UserConfigDir()
-	return filepath.Join(dir, app.Company, app.Name)
+	return filepath.Join(dir, app.company, app.name)
 }

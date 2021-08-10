@@ -21,13 +21,13 @@ var args struct {
 func main() {
 	app := cli.NewGoApp(
 		cli.WithName("GoApp"),
-		cli.WithCompany("Raijinsoft"),
-		cli.WithVersion("6.66"),
-		cli.WithEnableDebug(true),
+		cli.Withcompany("Raijinsoft"),
+		cli.Withversion("6.66"),
+		cli.WithdebugMode(true),
 		cli.WithArgs(&args),
 	)
 
-	fmt.Println(app.Name)
+	fmt.Println(app.GetName())
 	fmt.Println(args.NewApp.AppName)
 	fmt.Println(args.Quiet)
 	app.PrintError("This is an error")
