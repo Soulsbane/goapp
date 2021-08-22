@@ -21,9 +21,9 @@ var args struct {
 func main() {
 	app := cli.NewGoApp(
 		cli.WithName("GoApp"),
-		cli.Withcompany("Raijinsoft"),
-		cli.Withversion("6.66"),
-		cli.WithdebugMode(true),
+		cli.WithCompany("Raijinsoft"),
+		cli.WithVersion("6.66"),
+		cli.WithDebugMode(true),
 		cli.WithArgs(&args),
 	)
 

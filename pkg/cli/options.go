@@ -8,19 +8,19 @@ func WithName(name string) GoAppOption {
 	}
 }
 
-func Withcompany(company string) GoAppOption {
+func WithCompany(company string) GoAppOption {
 	return func(app *GoApp) {
 		app.company = company
 	}
 }
 
-func Withversion(version string) GoAppOption {
+func WithVersion(version string) GoAppOption {
 	return func(app *GoApp) {
 		app.version = version
 	}
 }
 
-func WithdebugMode(enable bool) GoAppOption {
+func WithDebugMode(enable bool) GoAppOption {
 	return func(app *GoApp) {
 		app.debugMode = enable
 	}
