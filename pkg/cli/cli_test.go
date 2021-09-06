@@ -19,9 +19,9 @@ var args struct {
 func TestCli(m *testing.T) {
 	app := cli.NewGoApp(
 		cli.WithName("OVER name"),
-		cli.Withcompany("OVER vend"),
-		cli.Withversion("6.66"),
-		cli.WithdebugMode(true),
+		cli.WithCompany("OVER vend"),
+		cli.WithVersion("6.66"),
+		cli.WithDebugMode(true),
 		cli.WithArgs(&args),
 	)
 
