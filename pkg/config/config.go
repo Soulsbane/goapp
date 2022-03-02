@@ -1,7 +1,13 @@
 package config
 
-import "fmt"
+type Config struct {
+	applicationName string
+	companyName     string
+}
 
-func ConfigHello() {
-	fmt.Println("Hello kthis is the CONFIG.")
+func New(name string, company string) *Config {
+	return &Config{
+		applicationName: name,
+		companyName:     company,
+	}
 }

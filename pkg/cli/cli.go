@@ -4,6 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/Soulsbane/goapp/pkg/config"
 	"github.com/Soulsbane/goapp/pkg/filelogger"
 	"github.com/alexflint/go-arg"
 )
@@ -13,6 +14,7 @@ type GoApp struct {
 	company   string
 	version   string
 	debugMode bool
+	config    config.Config
 	Args      interface{}
 }
 
