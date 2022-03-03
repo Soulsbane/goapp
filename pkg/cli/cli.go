@@ -1,9 +1,6 @@
 package cli
 
 import (
-	"os"
-	"path/filepath"
-
 	"github.com/Soulsbane/goapp/pkg/config"
 	"github.com/Soulsbane/goapp/pkg/filelogger"
 	"github.com/alexflint/go-arg"
@@ -14,7 +11,7 @@ type GoApp struct {
 	company   string
 	version   string
 	debugMode bool
-	config    config.Config
+	config    *config.Config
 	Args      interface{}
 }
 
@@ -41,7 +38,12 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 		option(app)
 	}
 
+	app.config = config.New(
+		config.WithApplicationName(app.name),
+		config.WithCompanyName(app.company))
+
 	arg.MustParse(app.Args)
+
 	return app
 }
 
@@ -76,6 +78,6 @@ func (app GoApp) CreateFileLogger(fileName string, flag int) filelogger.FileLogg
 
 // GetUserConfigDir Get the path to user's config dir with application and optionally company appened
 func (app GoApp) GetUserConfigDir() string {
-	dir, _ := os.UserConfigDir()
-	return filepath.Join(dir, app.company, app.name)
+	path, _ := app.config.GetConfigFilePath()
+	return path
 }
