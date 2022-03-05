@@ -11,8 +11,8 @@ type GoApp struct {
 	company   string
 	version   string
 	debugMode bool
-	config    *config.Config
 	Args      interface{}
+	config.Config
 }
 
 // NewGoApp returns a new GoApp instance with sensible defaults
@@ -38,10 +38,9 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 		option(app)
 	}
 
-	app.config = config.New(
-		config.WithApplicationName(app.name),
-		config.WithCompanyName(app.company))
-
+	// Set Config values
+	app.Config.SetApplicationName(app.name)
+	app.Config.SetCompanyName(app.company)
 	arg.MustParse(app.Args)
 
 	return app
@@ -72,12 +71,7 @@ func (app *GoApp) DisableDebugMode() {
 }
 
 func (app GoApp) CreateFileLogger(fileName string, flag int) filelogger.FileLogger {
-	logger := filelogger.New(fileName, app.GetUserConfigDir(), flag)
+	dir, _ := app.GetUserConfigDir()
+	logger := filelogger.New(fileName, dir, flag)
 	return logger
-}
-
-// GetUserConfigDir Get the path to user's config dir with application and optionally company appened
-func (app GoApp) GetUserConfigDir() string {
-	path, _ := app.config.GetUserConfigDir()
-	return path
 }

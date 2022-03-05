@@ -32,6 +32,14 @@ func New(options ...ConfigOption) *Config {
 	return app
 }
 
+func (config *Config) SetApplicationName(applicationName string) {
+	config.applicationName = applicationName
+}
+
+func (config *Config) SetCompanyName(companyName string) {
+	config.companyName = companyName
+}
+
 func (config Config) GetUserConfigDir() (string, error) {
 	fileName, err := os.UserConfigDir()
 	fileName = filepath.Join(fileName, config.companyName, config.applicationName)
