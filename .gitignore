@@ -1,2 +1,2 @@
-goapp
+cmd/goapp/goapp
 vendor/
