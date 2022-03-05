@@ -1,6 +1,9 @@
 package config
 
-import gap "github.com/muesli/go-app-paths"
+import (
+	"os"
+	"path/filepath"
+)
 
 const (
 	configFileName = "config.toml"
@@ -9,7 +12,6 @@ const (
 type Config struct {
 	applicationName string
 	companyName     string
-	scope           *gap.Scope
 }
 
 func New(options ...ConfigOption) *Config {
@@ -27,12 +29,19 @@ func New(options ...ConfigOption) *Config {
 		option(app)
 	}
 
-	app.scope = gap.NewVendorScope(gap.User, app.applicationName, app.companyName)
-
 	return app
 }
 
+func (config Config) GetUserConfigDir() (string, error) {
+	fileName, err := os.UserConfigDir()
+	fileName = filepath.Join(fileName, config.companyName, config.applicationName)
+
+	return fileName, err
+}
+
 func (config Config) GetConfigFilePath() (string, error) {
-	fileName, err := config.scope.ConfigPath(configFileName)
+	fileName, err := config.GetUserConfigDir()
+	fileName = filepath.Join(fileName, configFileName)
+
 	return fileName, err
 }

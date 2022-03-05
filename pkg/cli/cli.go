@@ -78,6 +78,6 @@ func (app GoApp) CreateFileLogger(fileName string, flag int) filelogger.FileLogg
 
 // GetUserConfigDir Get the path to user's config dir with application and optionally company appened
 func (app GoApp) GetUserConfigDir() string {
-	path, _ := app.config.GetConfigFilePath()
+	path, _ := app.config.GetUserConfigDir()
 	return path
 }
