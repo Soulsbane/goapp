@@ -49,7 +49,7 @@ func (app GoApp) PrintWarning(msg string) {
 // PrintDebug print a message in gray
 func (app GoApp) PrintDebug(msg string) {
 	if app.IsDebugModeEnabled() {
-		app.Println("[_light_red_][black]  DEBUG  [_default_][_light_red_] " + msg)
+		app.Println("[_light_red_][black]  DEBUG  [_default_][light_red] " + msg)
 		app.PrintCallerInfo()
 	}
 }
