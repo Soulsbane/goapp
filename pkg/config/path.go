@@ -14,7 +14,7 @@ func (config Config) GetUserConfigDir() (string, error) {
 
 func (config Config) GetConfigFilePath() (string, error) {
 	fileName, err := config.GetUserConfigDir()
-	fileName = filepath.Join(fileName, configFileName)
+	fileName = filepath.Join(fileName, DefaultConfigFileName)
 
 	return fileName, err
 }

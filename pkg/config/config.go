@@ -1,9 +1,5 @@
 package config
 
-const (
-	configFileName = "config.toml"
-)
-
 type Config struct {
 	applicationName string
 	companyName     string
