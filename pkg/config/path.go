@@ -12,7 +12,7 @@ func (config Config) GetUserConfigDir() (string, error) {
 	return fileName, err
 }
 
-func (config Config) GetConfigFilePath() (string, error) {
+func (config Config) GetUserConfigFilePath() (string, error) {
 	fileName, err := config.GetUserConfigDir()
 	fileName = filepath.Join(fileName, DefaultConfigFileName)
 

@@ -7,7 +7,7 @@ import (
 )
 
 func (config Config) OpenConfigFile() {
-	fileName, _ := config.GetConfigFilePath()
+	fileName, _ := config.GetUserConfigFilePath()
 	data, _ := ioutil.ReadFile(fileName)
 	err := toml.Unmarshal(data, &config.Values)
 
