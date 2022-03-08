@@ -15,3 +15,14 @@ func (config Config) OpenConfigFile() {
 		panic(err)
 	}
 }
+
+func (config Config) SaveConfigFile() {
+	fileName, _ := config.GetUserConfigFilePath()
+	data, err := toml.Marshal(&config.Values)
+
+	if err != nil {
+		panic(err)
+	}
+
+	ioutil.WriteFile(fileName, data, 0666)
+}

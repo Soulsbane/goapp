@@ -17,6 +17,12 @@ var args struct {
 	Quiet  bool           `arg:"-q"` // this flag is global to all subcommands
 }
 
+type MyConfig struct {
+	Name string
+}
+
+var cfg MyConfig
+
 func main() {
 	app := cli.NewGoApp(
 		cli.WithName("GoApp"),
@@ -25,6 +31,10 @@ func main() {
 		cli.WithDebugMode(true),
 		cli.WithArgs(&args),
 	)
+
+	cfg.Name = "Default Application Name is What?"
+	app.SetDefaultConfigValues(&cfg)
+	app.OpenConfigFile()
 
 	fmt.Println(app.GetName())
 	fmt.Println(args.NewApp.AppName)
@@ -40,4 +50,6 @@ func main() {
 	app.Println("[blue]This is a test [green]and another test")
 	path, _ := app.GetUserConfigDir()
 	app.PrintInfo(path)
+	app.SaveConfigFile()
+	fmt.Println(cfg.Name)
 }

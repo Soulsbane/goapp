@@ -34,3 +34,7 @@ func (config *Config) SetApplicationName(applicationName string) {
 func (config *Config) SetCompanyName(companyName string) {
 	config.companyName = companyName
 }
+
+func (config *Config) SetDefaultConfigValues(values interface{}) {
+	config.Values = &values
+}
