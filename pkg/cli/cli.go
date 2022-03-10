@@ -38,9 +38,11 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 		option(app)
 	}
 
-	// Set Config values
-	app.Config.SetApplicationName(app.name)
-	app.Config.SetCompanyName(app.company)
+	app.SetConfigPath(
+		config.WithApplicationName(app.name),
+		config.WithCompanyName(app.company),
+	)
+
 	arg.MustParse(app.Args)
 
 	return app
@@ -71,7 +73,7 @@ func (app *GoApp) DisableDebugMode() {
 }
 
 func (app GoApp) CreateFileLogger(fileName string, flag int) filelogger.FileLogger {
-	dir, _ := app.GetUserConfigDir()
+	dir, _ := app.Config.GetUserConfigDir()
 	logger := filelogger.New(fileName, dir, flag)
 	return logger
 }

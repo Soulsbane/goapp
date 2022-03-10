@@ -6,19 +6,20 @@ import (
 	toml "github.com/pelletier/go-toml/v2"
 )
 
-func (config Config) OpenConfigFile() {
+func (config Config) OpenConfigFile(values interface{}) {
 	fileName, _ := config.GetUserConfigFilePath()
 	data, _ := ioutil.ReadFile(fileName)
-	err := toml.Unmarshal(data, &config.Values)
+
+	err := toml.Unmarshal(data, values)
 
 	if err != nil {
 		panic(err)
 	}
 }
 
-func (config Config) SaveConfigFile() {
+func (config *Config) SaveConfigFile(values interface{}) {
 	fileName, _ := config.GetUserConfigFilePath()
-	data, err := toml.Marshal(&config.Values)
+	data, err := toml.Marshal(&values)
 
 	if err != nil {
 		panic(err)

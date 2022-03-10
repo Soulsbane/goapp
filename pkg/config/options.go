@@ -13,9 +13,3 @@ func WithCompanyName(company string) ConfigOption {
 		app.companyName = company
 	}
 }
-
-func WithValues(values interface{}) ConfigOption {
-	return func(app *Config) {
-		app.Values = values
-	}
-}

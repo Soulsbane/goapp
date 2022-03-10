@@ -24,6 +24,8 @@ type MyConfig struct {
 var cfg MyConfig
 
 func main() {
+	cfg.Name = "Default Application Name is What?"
+
 	app := cli.NewGoApp(
 		cli.WithName("GoApp"),
 		cli.WithCompany("Raijinsoft"),
@@ -32,9 +34,7 @@ func main() {
 		cli.WithArgs(&args),
 	)
 
-	cfg.Name = "Default Application Name is What?"
-	app.SetDefaultConfigValues(&cfg)
-	app.OpenConfigFile()
+	app.Config.OpenConfigFile(&cfg)
 
 	fmt.Println(app.GetName())
 	fmt.Println(args.NewApp.AppName)
@@ -50,6 +50,7 @@ func main() {
 	app.Println("[blue]This is a test [green]and another test")
 	path, _ := app.GetUserConfigDir()
 	app.PrintInfo(path)
-	app.SaveConfigFile()
-	fmt.Println(cfg.Name)
+	app.SaveConfigFile(&cfg)
+	fmt.Println("cfg.Name = ", cfg.Name)
+
 }
