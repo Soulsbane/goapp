@@ -2,6 +2,7 @@ package main
 
 // INFO Use go get github.com/Soulsbane/goapp@develop to get latest changes.
 import (
+	"errors"
 	"fmt"
 	"os"
 
@@ -34,7 +35,11 @@ func main() {
 		cli.WithArgs(&args),
 	)
 
-	app.Config.OpenConfigFile(&cfg)
+	err := app.Config.OpenConfigFile(&cfg)
+
+	if errors.Is(err, os.ErrNotExist) {
+		app.PrintFatal("Failed to open config file")
+	}
 
 	fmt.Println(app.GetName())
 	fmt.Println(args.NewApp.AppName)
@@ -50,6 +55,7 @@ func main() {
 	app.Println("[blue]This is a test [green]and another test")
 	path, _ := app.GetUserConfigDir()
 	app.PrintInfo(path)
+	fmt.Println("BEFORE SAVE: cfg.Name = ", cfg.Name)
 	app.SaveConfigFile(&cfg)
 	fmt.Println("cfg.Name = ", cfg.Name)
 

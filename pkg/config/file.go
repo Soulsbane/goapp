@@ -10,21 +10,17 @@ import (
 func (config Config) OpenConfigFile(values interface{}) error {
 	var result *multierror.Error
 
-	fileName, err := config.GetUserConfigFilePath()
-
-	if err != nil {
-		result = multierror.Append(result, err)
-	}
-
-	data, err := ioutil.ReadFile(fileName)
-
-	if err != nil {
-		result = multierror.Append(result, err)
-	}
-
-	err = toml.Unmarshal(data, values)
-
-	if err != nil {
+	if fileName, err := config.GetUserConfigFilePath(); err == nil {
+		if data, err := ioutil.ReadFile(fileName); err == nil {
+			if err = toml.Unmarshal(data, values); err == nil {
+				result = multierror.Append(result, err)
+			} else {
+				result = multierror.Append(result, err)
+			}
+		} else {
+			result = multierror.Append(result, err)
+		}
+	} else {
 		result = multierror.Append(result, err)
 	}
 
