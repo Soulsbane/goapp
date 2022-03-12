@@ -44,11 +44,6 @@ func main() {
 	fmt.Println(app.GetName())
 	fmt.Println(args.NewApp.AppName)
 	fmt.Println(args.Quiet)
-	app.PrintError("This is an error")
-	app.PrintFatal("This is an fatal string")
-	app.PrintWarning("This is an warning string")
-	app.PrintInfo("This is an info string")
-	app.PrintDebug("This is an debug string")
 	logger := app.CreateFileLogger("test.log", os.O_TRUNC)
 	logger.Println("This is a test")
 
