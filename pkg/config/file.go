@@ -13,7 +13,7 @@ func (config *Config) OpenConfigFile(values interface{}) error {
 
 	if fileName, err := config.GetUserConfigFilePath(); err == nil {
 		if data, err := ioutil.ReadFile(fileName); err == nil {
-			if err = toml.Unmarshal(data, &config.Values); err == nil {
+			if err = toml.Unmarshal(data, &config.Values); err != nil {
 				result = multierror.Append(result, err)
 			}
 		} else {
