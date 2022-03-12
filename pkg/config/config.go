@@ -3,9 +3,12 @@ package config
 type Config struct {
 	applicationName string
 	companyName     string
+	Values          interface{}
 }
 
 func New(options ...ConfigOption) *Config {
+	var emptyValues struct{}
+
 	const (
 		defaultName    = "GoApp"
 		defaultCompany = "GoCompanyApp"
@@ -14,6 +17,7 @@ func New(options ...ConfigOption) *Config {
 	app := &Config{
 		applicationName: defaultName,
 		companyName:     defaultCompany,
+		Values:          &emptyValues,
 	}
 
 	for _, option := range options {

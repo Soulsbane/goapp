@@ -35,7 +35,7 @@ func main() {
 		cli.WithArgs(&args),
 	)
 
-	err := app.Config.OpenConfigFile(&cfg)
+	err := app.OpenConfigFile(&cfg)
 
 	if errors.Is(err, os.ErrNotExist) {
 		app.PrintFatal("Failed to open config file")
@@ -55,8 +55,5 @@ func main() {
 	app.Println("[blue]This is a test [green]and another test")
 	path, _ := app.GetUserConfigDir()
 	app.PrintInfo(path)
-	fmt.Println("BEFORE SAVE: cfg.Name = ", cfg.Name)
-	app.SaveConfigFile(&cfg)
-	fmt.Println("cfg.Name = ", cfg.Name)
-
+	app.SaveConfigFile()
 }
