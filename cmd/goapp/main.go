@@ -39,6 +39,8 @@ func main() {
 
 	if errors.Is(err, os.ErrNotExist) {
 		app.PrintFatal("Failed to open config file")
+	} else {
+		fmt.Println(err)
 	}
 
 	fmt.Println(app.GetName())
@@ -50,5 +52,8 @@ func main() {
 	app.Println("[blue]This is a test [green]and another test")
 	path, _ := app.GetUserConfigDir()
 	app.PrintInfo(path)
-	app.SaveConfigFile()
+	err = app.SaveConfigFile()
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
 }

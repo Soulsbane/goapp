@@ -29,19 +29,17 @@ func (config *Config) OpenConfigFile(values interface{}) error {
 func (config *Config) SaveConfigFile() error {
 	var result *multierror.Error
 
-	fileName, err := config.GetUserConfigFilePath()
-
-	if err != nil {
+	if fileName, err := config.GetUserConfigFilePath(); err == nil {
+		if data, err := toml.Marshal(&config.Values); err == nil {
+			if err := ioutil.WriteFile(fileName, data, 0666); err != nil {
+				result = multierror.Append(result, err)
+			}
+		} else {
+			result = multierror.Append(result, err)
+		}
+	} else {
 		result = multierror.Append(result, err)
 	}
-
-	data, err := toml.Marshal(&config.Values)
-
-	if err != nil {
-		result = multierror.Append(result, err)
-	}
-
-	ioutil.WriteFile(fileName, data, 0666)
 
 	return result.ErrorOrNil()
 }
