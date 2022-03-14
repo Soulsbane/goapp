@@ -46,13 +46,19 @@ func main() {
 	fmt.Println(app.GetName())
 	fmt.Println(args.NewApp.AppName)
 	fmt.Println(args.Quiet)
-	logger := app.CreateFileLogger("test.log", os.O_TRUNC)
+	logger, err := app.CreateFileLogger("test.log", os.O_TRUNC)
+
+	if err != nil {
+		fmt.Println("New Logger Error: ", err)
+	}
+
 	logger.Println("This is a test")
 
 	app.Println("[blue]This is a test [green]and another test")
 	path, _ := app.GetUserConfigDir()
 	app.PrintInfo(path)
 	err = app.SaveConfigFile()
+
 	if err != nil {
 		fmt.Println("Error: ", err)
 	}

@@ -4,6 +4,7 @@ import (
 	"github.com/Soulsbane/goapp/pkg/config"
 	"github.com/Soulsbane/goapp/pkg/filelogger"
 	"github.com/alexflint/go-arg"
+	"github.com/hashicorp/go-multierror"
 )
 
 type GoApp struct {
@@ -74,8 +75,19 @@ func (app *GoApp) DisableDebugMode() {
 	app.debugMode = false
 }
 
-func (app GoApp) CreateFileLogger(fileName string, flag int) filelogger.FileLogger {
-	dir, _ := app.Config.GetUserConfigDir()
-	logger := filelogger.New(fileName, dir, flag)
-	return logger
+func (app GoApp) CreateFileLogger(fileName string, flag int) (filelogger.FileLogger, error) {
+	var result *multierror.Error
+	var logger filelogger.FileLogger
+
+	if dir, err := app.Config.GetUserConfigDir(); err == nil {
+		if logger, err := filelogger.New(fileName, dir, flag); err == nil {
+			return logger, err
+		} else {
+			result = multierror.Append(result, err)
+		}
+	} else {
+		result = multierror.Append(result, err)
+	}
+
+	return logger, result
 }
