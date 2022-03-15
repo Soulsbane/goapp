@@ -1,7 +1,7 @@
 package config
 
 import (
-	"io/ioutil"
+	"os"
 
 	"github.com/hashicorp/go-multierror"
 	toml "github.com/pelletier/go-toml/v2"
@@ -12,7 +12,7 @@ func (config *Config) OpenConfigFile(values interface{}) error {
 	config.Values = values
 
 	if fileName, err := config.GetUserConfigFilePath(); err == nil {
-		if data, err := ioutil.ReadFile(fileName); err == nil {
+		if data, err := os.ReadFile(fileName); err == nil {
 			if err = toml.Unmarshal(data, &config.Values); err != nil {
 				result = multierror.Append(result, err)
 			}
@@ -31,7 +31,7 @@ func (config *Config) SaveConfigFile() error {
 
 	if fileName, err := config.GetUserConfigFilePath(); err == nil {
 		if data, err := toml.Marshal(&config.Values); err == nil {
-			if err := ioutil.WriteFile(fileName, data, 0666); err != nil {
+			if err := os.WriteFile(fileName, data, 0666); err != nil {
 				result = multierror.Append(result, err)
 			}
 		} else {
