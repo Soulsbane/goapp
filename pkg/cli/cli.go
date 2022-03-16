@@ -75,9 +75,9 @@ func (app *GoApp) DisableDebugMode() {
 	app.debugMode = false
 }
 
-func (app GoApp) CreateFileLogger(fileName string, flag int) (filelogger.FileLogger, error) {
+func (app GoApp) CreateFileLogger(fileName string, flag int) (*filelogger.FileLogger, error) {
 	var result *multierror.Error
-	var logger filelogger.FileLogger
+	var logger *filelogger.FileLogger
 
 	if dir, err := app.Config.GetUserConfigDir(); err == nil {
 		if logger, err := filelogger.New(fileName, dir, flag); err == nil {

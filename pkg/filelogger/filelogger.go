@@ -11,8 +11,8 @@ type FileLogger struct {
 	logger *log.Logger
 }
 
-func New(fileName string, directory string, flag int) (FileLogger, error) {
-	var fileLogger FileLogger
+func New(fileName string, directory string, flag int) (*FileLogger, error) {
+	fileLogger := &FileLogger{}
 
 	os.MkdirAll(directory, os.ModePerm)
 	file, err := os.OpenFile(path.Join(directory, fileName), flag|os.O_CREATE|os.O_WRONLY, 0644)
