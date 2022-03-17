@@ -38,7 +38,7 @@ func main() {
 	err := app.OpenConfigFile(&cfg)
 
 	if errors.Is(err, os.ErrNotExist) {
-		app.PrintFatal("Failed to open config file")
+		app.PrintFatal("Config file not found.")
 	} else {
 		fmt.Println(err)
 	}
