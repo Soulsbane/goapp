@@ -40,7 +40,7 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 		option(app)
 	}
 
-	app.SetConfigPath(
+	app.SetConfigOptions(
 		config.WithApplicationName(app.name),
 		config.WithCompanyName(app.company),
 		config.WithConfigValues(emptyValues),

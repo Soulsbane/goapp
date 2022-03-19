@@ -27,7 +27,7 @@ func New(options ...ConfigOption) *Config {
 	return app
 }
 
-func (config *Config) SetConfigPath(options ...ConfigOption) {
+func (config *Config) SetConfigOptions(options ...ConfigOption) {
 	for _, option := range options {
 		option(config)
 	}
