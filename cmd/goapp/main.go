@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/Soulsbane/goapp/pkg/cli"
+	"github.com/alexflint/go-arg"
 )
 
 type NewAppCommand struct {
@@ -30,9 +31,9 @@ func main() {
 		cli.WithCompany("Raijinsoft"),
 		cli.WithVersion("6.66"),
 		cli.WithDebugMode(true),
-		cli.WithArgs(&args),
 	)
 
+	arg.MustParse(&args)
 	err := app.OpenConfigFile(&cfg)
 
 	if errors.Is(err, os.ErrNotExist) {

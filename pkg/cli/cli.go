@@ -3,7 +3,6 @@ package cli
 import (
 	"github.com/Soulsbane/goapp/pkg/config"
 	"github.com/Soulsbane/goapp/pkg/filelogger"
-	"github.com/alexflint/go-arg"
 	"github.com/hashicorp/go-multierror"
 )
 
@@ -12,7 +11,6 @@ type GoApp struct {
 	company   string
 	version   string
 	debugMode bool
-	Args      interface{}
 	config.Config
 }
 
@@ -40,8 +38,6 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 		config.WithApplicationName(app.name),
 		config.WithCompanyName(app.company),
 	)
-
-	arg.MustParse(app.Args)
 
 	return app
 }

@@ -25,9 +25,3 @@ func WithDebugMode(enable bool) GoAppOption {
 		app.debugMode = enable
 	}
 }
-
-func WithArgs(args interface{}) GoAppOption {
-	return func(app *GoApp) {
-		app.Args = args
-	}
-}
