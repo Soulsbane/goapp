@@ -18,7 +18,6 @@ type GoApp struct {
 
 // NewGoApp returns a new GoApp instance with sensible defaults
 func NewGoApp(options ...GoAppOption) *GoApp {
-	var emptyArgs struct{}
 	var emptyValues struct{}
 
 	const (
@@ -33,7 +32,6 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 		company:   config.DefaultCompany,
 		version:   config.DefaultVersion,
 		debugMode: defaultDebugMode,
-		Args:      &emptyArgs,
 	}
 
 	for _, option := range options {
