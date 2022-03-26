@@ -9,11 +9,10 @@ import (
 
 func (config *Config) OpenConfigFile(values interface{}) error {
 	var result *multierror.Error
-	config.Values = values
 
 	if fileName, err := config.GetUserConfigFilePath(); err == nil {
 		if data, err := os.ReadFile(fileName); err == nil {
-			if err = toml.Unmarshal(data, &config.Values); err != nil {
+			if err = toml.Unmarshal(data, values); err != nil {
 				result = multierror.Append(result, err)
 			}
 		} else {
@@ -26,11 +25,11 @@ func (config *Config) OpenConfigFile(values interface{}) error {
 	return result.ErrorOrNil()
 }
 
-func (config *Config) SaveConfigFile() error {
+func (config *Config) SaveConfigFile(values interface{}) error {
 	var result *multierror.Error
 
 	if fileName, err := config.GetUserConfigFilePath(); err == nil {
-		if data, err := toml.Marshal(&config.Values); err == nil {
+		if data, err := toml.Marshal(values); err == nil {
 			if err := os.WriteFile(fileName, data, 0666); err != nil {
 				result = multierror.Append(result, err)
 			}

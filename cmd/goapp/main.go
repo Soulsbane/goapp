@@ -25,8 +25,6 @@ type MyConfig struct {
 var cfg MyConfig
 
 func main() {
-	cfg.Name = "Default Application Name is What?"
-
 	app := cli.NewGoApp(
 		cli.WithName("GoApp"),
 		cli.WithCompany("Raijinsoft"),
@@ -40,7 +38,7 @@ func main() {
 	if errors.Is(err, os.ErrNotExist) {
 		app.PrintFatal("Config file not found.")
 	} else {
-		fmt.Println(err)
+		fmt.Println("OpenConfigFile Error: ", err)
 	}
 
 	fmt.Println(app.GetName())
@@ -57,9 +55,21 @@ func main() {
 	app.Println("[blue]This is a test [green]and another test")
 	path, _ := app.GetUserConfigDir()
 	app.PrintInfo(path)
-	err = app.SaveConfigFile()
+
+	fmt.Println("cfg.Name: ", cfg.Name)
+	cfg.Name = "What is this"
+	err = app.SaveConfigFile(&cfg)
 
 	if err != nil {
 		fmt.Println("Error: ", err)
 	}
+
+	/*switch {
+	case app.Args.(NewAppCommand).AppName != nil:
+		fmt.Println(args)
+		createTemplate()
+
+	default:
+		fmt.Println("Use -h to see help")
+	}*/
 }

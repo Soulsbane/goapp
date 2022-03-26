@@ -18,8 +18,6 @@ type GoApp struct {
 
 // NewGoApp returns a new GoApp instance with sensible defaults
 func NewGoApp(options ...GoAppOption) *GoApp {
-	var emptyValues struct{}
-
 	const (
 		defaultName      = "New Go Application"
 		defaultCompany   = "My company Name"
@@ -41,7 +39,6 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 	app.SetConfigOptions(
 		config.WithApplicationName(app.name),
 		config.WithCompanyName(app.company),
-		config.WithConfigValues(emptyValues),
 	)
 
 	arg.MustParse(app.Args)
