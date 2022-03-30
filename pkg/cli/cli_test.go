@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/Soulsbane/goapp/pkg/cli"
+	"github.com/alexflint/go-arg"
 )
 
 type NewAppCommand struct {
@@ -22,8 +23,9 @@ func TestCli(m *testing.T) {
 		cli.WithCompany("OVER vend"),
 		cli.WithVersion("6.66"),
 		cli.WithDebugMode(true),
-		cli.WithArgs(&args),
 	)
+
+	arg.MustParse(&args)
 
 	fmt.Println(app.GetName())
 }
