@@ -36,41 +36,17 @@ func main() {
 	arg.MustParse(&args)
 	err := app.OpenConfigFile(&cfg)
 
-	if errors.Is(err, os.ErrNotExist) {
+	if err != nil && errors.Is(err, os.ErrNotExist) {
 		app.PrintFatal("Config file not found.")
 	} else {
-		fmt.Println("OpenConfigFile Error: ", err)
+		fmt.Println("OpenConfigFile Error: ", err) // Will be nil if no errors
 	}
 
-	fmt.Println(app.GetName())
-	fmt.Println(args.NewApp.AppName)
-	fmt.Println(args.Quiet)
-	logger, err := app.CreateFileLogger("test.log", os.O_TRUNC)
-
-	if err != nil {
-		fmt.Println("New Logger Error: ", err)
-	}
-
-	logger.Println("This is a test")
-
-	app.Println("[blue]This is a test [green]and another test")
-	path, _ := app.GetUserConfigDir()
-	app.PrintInfo(path)
-
-	fmt.Println("cfg.Name: ", cfg.Name)
-	cfg.Name = "What is this"
-	err = app.SaveConfigFile(&cfg)
-
-	if err != nil {
-		fmt.Println("Error: ", err)
-	}
-
-	/*switch {
-	case app.Args.(NewAppCommand).AppName != nil:
-		fmt.Println(args)
-		createTemplate()
+	switch {
+	case args.NewApp != nil:
+		createTemplate(args.NewApp.AppName)
 
 	default:
 		fmt.Println("Use -h to see help")
-	}*/
+	}
 }
