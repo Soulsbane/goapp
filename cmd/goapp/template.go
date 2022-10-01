@@ -30,7 +30,9 @@ func createTemplate(appName string) {
 	if err != nil {
 		fmt.Println("Failed to read template app.tpl")
 	}
+
 	err = tmpl.Execute(os.Stdout, templateVars)
+
 	if err != nil {
 		fmt.Println("Failed to read template app.tpl")
 	}

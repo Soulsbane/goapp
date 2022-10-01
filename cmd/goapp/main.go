@@ -38,8 +38,6 @@ func main() {
 
 	if err != nil && errors.Is(err, os.ErrNotExist) {
 		app.PrintFatal("Config file not found.")
-	} else {
-		fmt.Println("OpenConfigFile Error: ", err) // Will be nil if no errors
 	}
 
 	switch {
