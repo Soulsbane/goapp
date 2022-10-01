@@ -7,7 +7,7 @@ import (
 	toml "github.com/pelletier/go-toml/v2"
 )
 
-func (config *Config) OpenConfigFile(values interface{}) error {
+func (config *Config) OpenConfigFile(values any) error {
 	var result *multierror.Error
 
 	if fileName, err := config.GetUserConfigFilePath(); err == nil {
@@ -25,7 +25,7 @@ func (config *Config) OpenConfigFile(values interface{}) error {
 	return result.ErrorOrNil()
 }
 
-func (config *Config) SaveConfigFile(values interface{}) error {
+func (config *Config) SaveConfigFile(values any) error {
 	var result *multierror.Error
 
 	if fileName, err := config.GetUserConfigFilePath(); err == nil {

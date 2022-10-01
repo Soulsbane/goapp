@@ -12,7 +12,7 @@ const (
 )
 
 // Println Print a message using mitchellh/colorstring tags
-func (app GoApp) Println(msg ...interface{}) {
+func (app GoApp) Println(msg ...any) {
 	var args string
 
 	for _, arg := range msg {

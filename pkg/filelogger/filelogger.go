@@ -21,11 +21,11 @@ func New(fileName string, directory string, flag int) (*FileLogger, error) {
 	return fileLogger, err
 }
 
-func (fileLogger FileLogger) Println(msg ...interface{}) {
+func (fileLogger FileLogger) Println(msg ...any) {
 	fileLogger.logger.Println(msg...)
 }
 
-func (fileLogger FileLogger) Print(msg ...interface{}) {
+func (fileLogger FileLogger) Print(msg ...any) {
 	fileLogger.logger.Print(msg...)
 }
 
