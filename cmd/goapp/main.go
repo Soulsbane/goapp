@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/Soulsbane/goapp/pkg/cli"
-	"github.com/alexflint/go-arg"
+	// "github.com/alexflint/go-arg"
 )
 
 type NewAppCommand struct {
@@ -27,13 +27,13 @@ var cfg MyConfig
 
 func main() {
 	app := cli.NewGoApp(
+		&args,
 		cli.WithName("GoApp"),
 		cli.WithCompany("Raijinsoft"),
 		cli.WithVersion("6.66"),
 		cli.WithDebugMode(true),
 	)
 
-	arg.MustParse(&args)
 	err := app.OpenConfigFile(&cfg)
 
 	if err != nil && errors.Is(err, os.ErrNotExist) {
@@ -43,6 +43,7 @@ func main() {
 	switch {
 	case args.NewApp != nil:
 		createTemplate(args.NewApp.AppName)
+		fmt.Println(args.Quiet)
 
 	default:
 		fmt.Println("Use -h to see help")

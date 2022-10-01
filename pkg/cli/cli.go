@@ -3,6 +3,7 @@ package cli
 import (
 	"github.com/Soulsbane/goapp/pkg/config"
 	"github.com/Soulsbane/goapp/pkg/filelogger"
+	"github.com/alexflint/go-arg"
 	"github.com/hashicorp/go-multierror"
 )
 
@@ -15,7 +16,7 @@ type GoApp struct {
 }
 
 // NewGoApp returns a new GoApp instance with sensible defaults
-func NewGoApp(options ...GoAppOption) *GoApp {
+func NewGoApp(args any, options ...GoAppOption) *GoApp {
 	const (
 		defaultName      = "New Go Application"
 		defaultCompany   = "My company Name"
@@ -33,6 +34,8 @@ func NewGoApp(options ...GoAppOption) *GoApp {
 	for _, option := range options {
 		option(app)
 	}
+
+	arg.MustParse(args)
 
 	app.SetConfigOptions(
 		config.WithApplicationName(app.name),
