@@ -23,7 +23,7 @@ func (app GoApp) Println(msg ...any) {
 	colorstring.Println(colorized)
 }
 
-func (app GoApp) PrintCallerInfo() {
+func (app GoApp) printCallerInfo() {
 	_, fileName, line, _ := runtime.Caller(2)
 	app.Println(callerInfoColor, "└(", fileName, ":", strconv.Itoa(line), ")")
 }
@@ -31,31 +31,31 @@ func (app GoApp) PrintCallerInfo() {
 // PrintError print a message in red
 func (app GoApp) PrintError(msg string) {
 	app.Println("[_red_][black]  ERROR  [_default_][light_red] " + msg)
-	app.PrintCallerInfo()
+	app.printCallerInfo()
 }
 
 // PrintFatal print a message in light red
 func (app GoApp) PrintFatal(msg string) {
 	app.Println("[_red_][black]  FATAL  [_default_][light_red] " + msg)
-	app.PrintCallerInfo()
+	app.printCallerInfo()
 }
 
 // PrintWarning print a message in yellow
 func (app GoApp) PrintWarning(msg string) {
 	app.Println("[_yellow_][black]  WARNING  [_default_][yellow] " + msg)
-	app.PrintCallerInfo()
+	app.printCallerInfo()
 }
 
 // PrintDebug print a message in gray
 func (app GoApp) PrintDebug(msg string) {
 	if app.IsDebugModeEnabled() {
 		app.Println("[_light_red_][black]  DEBUG  [_default_][light_red] " + msg)
-		app.PrintCallerInfo()
+		app.printCallerInfo()
 	}
 }
 
 // PrintInfo print a message in cyan
 func (app GoApp) PrintInfo(msg string) {
 	app.Println("[_cyan_][black]  INFO  [_default_][light_cyan] " + msg)
-	app.PrintCallerInfo()
+	app.printCallerInfo()
 }
