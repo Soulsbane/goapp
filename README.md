@@ -1,3 +1,3 @@
 # Description
 
-Just my personal common CLI functionality for my Go applications.
+Just my personal very opinionated common CLI functionality for my Go applications.
