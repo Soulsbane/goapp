@@ -1,6 +1,8 @@
 package cli
 
 import (
+	"path/filepath"
+
 	"github.com/Soulsbane/goapp/pkg/config"
 	"github.com/Soulsbane/goapp/pkg/filelogger"
 	"github.com/alexflint/go-arg"
@@ -74,7 +76,7 @@ func (app GoApp) CreateFileLogger(fileName string, flag int) (*filelogger.FileLo
 	var logger *filelogger.FileLogger
 
 	if dir, err := app.Config.GetUserConfigDir(); err == nil {
-		if logger, err := filelogger.New(fileName, dir, flag); err == nil {
+		if logger, err := filelogger.New(fileName, filepath.Join(dir, "logs"), flag); err == nil {
 			return logger, err
 		} else {
 			result = multierror.Append(result, err)
