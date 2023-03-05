@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Soulsbane/goapp/pkg/cli"
+	"github.com/Soulsbane/goapp/cli"
 	// "github.com/alexflint/go-arg"
 )
 
