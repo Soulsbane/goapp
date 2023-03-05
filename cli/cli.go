@@ -3,8 +3,8 @@ package cli
 import (
 	"path/filepath"
 
-	"github.com/Soulsbane/goapp/pkg/config"
-	"github.com/Soulsbane/goapp/pkg/filelogger"
+	"github.com/Soulsbane/goapp/config"
+	"github.com/Soulsbane/goapp/filelogger"
 	"github.com/alexflint/go-arg"
 	"github.com/hashicorp/go-multierror"
 )
