@@ -27,8 +27,8 @@ func NewGoApp(args any, options ...GoAppOption) *GoApp {
 	)
 
 	app := &GoApp{
-		name:      config.DefaultName,
-		company:   config.DefaultCompany,
+		name:      config.DefaultApplicationName,
+		company:   config.DefaultCompanyName,
 		version:   config.DefaultVersion,
 		debugMode: defaultDebugMode,
 	}

@@ -1,8 +1,8 @@
 package config
 
 const (
-	DefaultConfigFileName = "config.toml"
-	DefaultName           = "New Go Application"
-	DefaultCompany        = "My company Name"
-	DefaultVersion        = "1.0"
+	DefaultConfigFileName  = "config.toml"
+	DefaultApplicationName = "New Go Application"
+	DefaultCompanyName     = "My company Name"
+	DefaultVersion         = "1.0"
 )
