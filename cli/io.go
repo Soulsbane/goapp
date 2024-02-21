@@ -11,7 +11,7 @@ const (
 	callerInfoColor = "[green]"
 )
 
-// Println Print a message using mitchellh/colorstring tags
+// Println Print a message using github.com/mitchellh/colorstring tags
 func (app *GoApp) Println(msg ...any) {
 	var args string
 
