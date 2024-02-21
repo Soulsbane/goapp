@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/hashicorp/go-multierror"
-	toml "github.com/pelletier/go-toml/v2"
+	"github.com/pelletier/go-toml/v2"
 )
 
 func (config *Config) OpenConfigFile(values any) error {
