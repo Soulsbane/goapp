@@ -47,19 +47,19 @@ func NewGoApp(args any, options ...GoAppOption) *GoApp {
 	return app
 }
 
-func (app GoApp) GetName() string {
+func (app *GoApp) GetName() string {
 	return app.name
 }
 
-func (app GoApp) GetCompany() string {
+func (app *GoApp) GetCompany() string {
 	return app.company
 }
 
-func (app GoApp) GetVersion() string {
+func (app *GoApp) GetVersion() string {
 	return app.version
 }
 
-func (app GoApp) IsDebugModeEnabled() bool {
+func (app *GoApp) IsDebugModeEnabled() bool {
 	return app.debugMode
 }
 
@@ -71,7 +71,7 @@ func (app *GoApp) DisableDebugMode() {
 	app.debugMode = false
 }
 
-func (app GoApp) CreateFileLogger(fileName string, flag int) (*filelogger.FileLogger, error) {
+func (app *GoApp) CreateFileLogger(fileName string, flag int) (*filelogger.FileLogger, error) {
 	var result *multierror.Error
 	var logger *filelogger.FileLogger
 
