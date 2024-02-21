@@ -20,9 +20,6 @@ type GoApp struct {
 // NewGoApp returns a new GoApp instance with sensible defaults
 func NewGoApp(args any, options ...GoAppOption) *GoApp {
 	const (
-		defaultName      = "New Go Application"
-		defaultCompany   = "My company Name"
-		defaultVersion   = "1.0"
 		defaultDebugMode = false
 	)
 
