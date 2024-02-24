@@ -72,7 +72,7 @@ func (app *GoApp) CreateFileLogger(fileName string, flag int) (*filelogger.FileL
 	var result *multierror.Error
 	var logger *filelogger.FileLogger
 
-	if dir, err := app.Config.GetUserConfigDir(); err == nil {
+	if dir, err := app.GetUserConfigDir(); err == nil {
 		if logger, err := filelogger.New(fileName, filepath.Join(dir, "logs"), flag); err == nil {
 			return logger, err
 		} else {
