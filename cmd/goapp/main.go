@@ -7,7 +7,6 @@ import (
 	"os"
 
 	"github.com/Soulsbane/goapp/cli"
-	// "github.com/alexflint/go-arg"
 )
 
 type NewAppCommand struct {
