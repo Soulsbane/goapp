@@ -1,12 +1,13 @@
 package cli
 
 import (
+	"fmt"
+	"log/slog"
+	"os"
 	"path/filepath"
 
 	"github.com/Soulsbane/goapp/config"
-	"github.com/Soulsbane/goapp/filelogger"
 	"github.com/alexflint/go-arg"
-	"github.com/hashicorp/go-multierror"
 )
 
 type GoApp struct {
@@ -68,19 +69,25 @@ func (app *GoApp) DisableDebugMode() {
 	app.debugMode = false
 }
 
-func (app *GoApp) CreateFileLogger(fileName string, flag int) (*filelogger.FileLogger, error) {
-	var result *multierror.Error
-	var logger *filelogger.FileLogger
-
+func (app *GoApp) CreateFileLogger(fileName string, options *slog.HandlerOptions) (*slog.Logger, error) {
 	if dir, err := app.GetUserConfigDir(); err == nil {
-		if logger, err := filelogger.New(fileName, filepath.Join(dir, "logs"), flag); err == nil {
-			return logger, err
-		} else {
-			result = multierror.Append(result, err)
-		}
-	} else {
-		result = multierror.Append(result, err)
-	}
+		logDirectory := filepath.Join(dir, "logs")
 
-	return logger, result
+		err := os.MkdirAll(logDirectory, os.ModePerm)
+
+		if err != nil {
+			return nil, fmt.Errorf("failed to make log file directory: %w", err)
+		}
+
+		file, err := os.OpenFile(filepath.Join(logDirectory, fileName), os.O_CREATE|os.O_WRONLY, 0644)
+
+		if err != nil {
+			return nil, fmt.Errorf("failed to open log file: %w", err)
+		}
+
+		return slog.New(slog.NewJSONHandler(file, options)), nil
+
+	} else {
+		return nil, fmt.Errorf("failed to get user config directory: %w", err)
+	}
 }
