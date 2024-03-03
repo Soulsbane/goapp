@@ -2,11 +2,10 @@ package main
 
 // INFO Use go get github.com/Soulsbane/goapp@develop to get latest changes.
 import (
-	"errors"
 	"fmt"
-	"os"
-
 	"github.com/Soulsbane/goapp/cli"
+	"github.com/Soulsbane/goapp/filelogger"
+	"log/slog"
 )
 
 type NewAppCommand struct {
@@ -33,11 +32,14 @@ func main() {
 		cli.WithDebugMode(true),
 	)
 
-	err := app.OpenConfigFile(&cfg)
+	//err := app.OpenConfigFile(&cfg)
+	logger, _ := app.CreateFileLogger(nil)
+	logger.Info("This is a test")
+	slog.Info(filelogger.CreateLogFileName())
 
-	if err != nil && errors.Is(err, os.ErrNotExist) {
-		app.PrintFatal("Config file not found.")
-	}
+	//if err != nil && errors.Is(err, os.ErrNotExist) {
+	//	app.PrintFatal("Config file not found.")
+	//}
 
 	switch {
 	case args.NewApp != nil:

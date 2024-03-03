@@ -2,6 +2,7 @@ package cli
 
 import (
 	"fmt"
+	"github.com/Soulsbane/goapp/filelogger"
 	"log/slog"
 	"os"
 	"path/filepath"
@@ -69,7 +70,7 @@ func (app *GoApp) DisableDebugMode() {
 	app.debugMode = false
 }
 
-func (app *GoApp) CreateFileLogger(fileName string, options *slog.HandlerOptions) (*slog.Logger, error) {
+func (app *GoApp) CreateFileLogger(options *slog.HandlerOptions) (*slog.Logger, error) {
 	if dir, err := app.GetUserConfigDir(); err == nil {
 		logDirectory := filepath.Join(dir, "logs")
 
@@ -79,7 +80,7 @@ func (app *GoApp) CreateFileLogger(fileName string, options *slog.HandlerOptions
 			return nil, fmt.Errorf("failed to make log file directory: %w", err)
 		}
 
-		file, err := os.OpenFile(filepath.Join(logDirectory, fileName), os.O_CREATE|os.O_WRONLY, 0644)
+		file, err := os.OpenFile(filepath.Join(logDirectory, filelogger.CreateLogFileName()), os.O_CREATE|os.O_WRONLY, 0644)
 
 		if err != nil {
 			return nil, fmt.Errorf("failed to open log file: %w", err)
