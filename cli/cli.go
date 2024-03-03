@@ -71,8 +71,8 @@ func (app *GoApp) DisableDebugMode() {
 }
 
 func (app *GoApp) CreateFileLogger(options *slog.HandlerOptions) (*slog.Logger, error) {
-	if dir, err := app.GetUserConfigDir(); err == nil {
-		logDirectory := filepath.Join(dir, "logs")
+	if cacheDir, err := os.UserCacheDir(); err == nil {
+		logDirectory := filepath.Join(cacheDir, app.GetCompany(), app.GetName(), "logs")
 
 		err := os.MkdirAll(logDirectory, os.ModePerm)
 
